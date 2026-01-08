@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebNotes - 我的在线记事本</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📝 WebNotes - 在线记事本</h1>
+            <div class="header-actions">
+                <button id="saveBtn" class="btn btn-primary" style="display: none;" title="保存笔记 (Ctrl+S)">💾 保存</button>
+                <button id="loginBtn" class="btn btn-secondary">🔐 登录</button>
+                <button id="logoutBtn" class="btn btn-secondary" style="display: none;">退出</button>
+                <span id="userInfo" class="user-info" style="display: none;"></span>
+            </div>
+        </header>
+
+        <div id="loginScreen" class="login-screen">
+            <div class="login-box">
+                <h2>欢迎使用 WebNotes</h2>
+                <p>使用 GitHub 账号登录以开始使用</p>
+                <button id="githubLoginBtn" class="btn btn-primary btn-large">🔐 使用 GitHub 登录</button>
+            </div>
+        </div>
+
+        <div id="editorScreen" class="editor-screen" style="display: none; visibility: hidden;">
+            <div class="toolbar">
+                <button class="tool-btn" onclick="formatText('bold')" title="粗体">B</button>
+                <button class="tool-btn" onclick="formatText('italic')" title="斜体">I</button>
+                <button class="tool-btn" onclick="formatText('underline')" title="下划线">U</button>
+                <button class="tool-btn" onclick="insertLink()" title="插入链接">🔗</button>
+                <button class="tool-btn" onclick="insertImage()" title="插入图片">🖼️</button>
+                <input type="file" id="fileInput" accept="image/*,.pdf,.doc,.docx,.txt" style="display: none;" multiple>
+                <button class="tool-btn" onclick="document.getElementById('fileInput').click()" title="上传文件">📎</button>
+            </div>
+            
+            <div class="editor-container">
+                <div 
+                    id="editor" 
+                    contenteditable="true" 
+                    class="editor"
+                    placeholder="开始输入你的笔记..."
+                    spellcheck="true"
+                ></div>
+            </div>
+
+            <div class="status-bar">
+                <span id="statusText">就绪</span>
+                <span id="lastSaved" class="last-saved"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="editor.js"></script>
+</body>
+</html>

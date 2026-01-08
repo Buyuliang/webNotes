@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试编辑器显示</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .test-info {
+            background: #f0f0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        #editorScreen {
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin-top: 20px;
+            background: white;
+        }
+        .toolbar {
+            background: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .tool-btn {
+            padding: 5px 10px;
+            margin: 0 5px;
+            background: white;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        #editor {
+            min-height: 200px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h2>编辑器显示测试</h2>
+        <p>点击下面的按钮来测试编辑器界面显示</p>
+        <button onclick="showEditor()">显示编辑器</button>
+        <button onclick="hideEditor()">隐藏编辑器</button>
+        <button onclick="checkElements()">检查元素</button>
+    </div>
+
+    <div id="editorScreen" style="display: none;">
+        <div class="toolbar">
+            <button class="tool-btn" onclick="formatText('bold')" title="粗体">B</button>
+            <button class="tool-btn" onclick="formatText('italic')" title="斜体">I</button>
+            <button class="tool-btn" onclick="formatText('underline')" title="下划线">U</button>
+            <button class="tool-btn" onclick="insertLink()" title="插入链接">🔗</button>
+            <button class="tool-btn" onclick="insertImage()" title="插入图片">🖼️</button>
+            <button class="tool-btn" title="上传文件">📎</button>
+        </div>
+        
+        <div id="editor" contenteditable="true" placeholder="开始输入你的笔记...">
+            <p>欢迎使用 WebNotes！开始记录你的想法吧 🎉</p>
+        </div>
+    </div>
+
+    <div id="log" style="margin-top: 20px; padding: 10px; background: #f9f9f9; border-radius: 4px;">
+        <strong>日志：</strong>
+        <div id="logContent"></div>
+    </div>
+
+    <script>
+        function log(message) {
+            const logContent = document.getElementById('logContent');
+            const time = new Date().toLocaleTimeString();
+            logContent.innerHTML += `<div>[${time}] ${message}</div>`;
+            console.log(message);
+        }
+
+        function showEditor() {
+            const editorScreen = document.getElementById('editorScreen');
+            if (editorScreen) {
+                editorScreen.style.display = 'block';
+                editorScreen.style.visibility = 'visible';
+                log('编辑器界面已显示');
+            } else {
+                log('错误：找不到 editorScreen 元素');
+            }
+        }
+
+        function hideEditor() {
+            const editorScreen = document.getElementById('editorScreen');
+            if (editorScreen) {
+                editorScreen.style.display = 'none';
+                log('编辑器界面已隐藏');
+            }
+        }
+
+        function checkElements() {
+            log('检查元素...');
+            const editorScreen = document.getElementById('editorScreen');
+            const editor = document.getElementById('editor');
+            const toolbar = document.querySelector('.toolbar');
+            
+            log(`editorScreen: ${editorScreen ? '存在' : '不存在'}`);
+            if (editorScreen) {
+                const style = window.getComputedStyle(editorScreen);
+                log(`editorScreen display: ${style.display}`);
+                log(`editorScreen visibility: ${style.visibility}`);
+            }
+            
+            log(`editor: ${editor ? '存在' : '不存在'}`);
+            log(`toolbar: ${toolbar ? '存在' : '不存在'}`);
+        }
+
+        function formatText(command) {
+            document.execCommand(command, false, null);
+            document.getElementById('editor').focus();
+            log(`格式化: ${command}`);
+        }
+
+        function insertLink() {
+            const url = prompt('请输入链接地址:');
+            if (url) {
+                document.execCommand('createLink', false, url);
+                log(`插入链接: ${url}`);
+            }
+        }
+
+        function insertImage() {
+            log('插入图片功能');
+        }
+
+        // 页面加载时自动检查
+        window.addEventListener('DOMContentLoaded', () => {
+            log('页面加载完成');
+            checkElements();
+        });
+    </script>
+</body>
+</html>
+
