@@ -1,0 +1,23 @@
+{
+  "name": "webnotes",
+  "version": "1.0.0",
+  "description": "基于 GitHub 的在线记事本应用",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "keywords": [
+    "notebook",
+    "github",
+    "cloudflare",
+    "worker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
+

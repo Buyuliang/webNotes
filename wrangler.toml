@@ -1,0 +1,19 @@
+name = "webnotes"
+main = "src/index.js"
+compatibility_date = "2026-01-08"
+
+# GitHub OAuth 配置（需要在 Cloudflare Dashboard 中设置）
+# GITHUB_CLIENT_ID - GitHub OAuth App Client ID
+# GITHUB_CLIENT_SECRET - GitHub OAuth App Client Secret
+# GITHUB_REPO - 存储笔记的仓库名（默认: webNotes）
+# GITHUB_USERNAME - GitHub 用户名（可选，会从 OAuth 获取）
+
+# KV 命名空间配置（需要在 Cloudflare Dashboard 中创建）
+# SESSIONS - 用于存储用户会话的 KV 命名空间
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "a77fa67c99c441dcb48f6f791cd5d7e3"
+
+# 环境变量示例（在 Cloudflare Dashboard 中设置）
+# [vars]
+# GITHUB_REPO = "webNotes"

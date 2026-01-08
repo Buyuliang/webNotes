@@ -1,0 +1,11 @@
+# Cloudflare Worker 环境变量示例
+# 复制此文件为 .dev.vars 并填入实际值（.dev.vars 已在 .gitignore 中）
+
+# GitHub OAuth App 配置
+GITHUB_CLIENT_ID=your_github_client_id_here
+GITHUB_CLIENT_SECRET=your_github_client_secret_here
+
+# GitHub 仓库配置（可选）
+GITHUB_REPO=webNotes
+GITHUB_USERNAME=your_github_username
+
